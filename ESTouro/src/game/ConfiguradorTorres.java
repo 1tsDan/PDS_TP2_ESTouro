@@ -9,6 +9,14 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.LinkedHashMap;
 import torre.Torre;
+import torre.modo_ataque.AtacaForte;
+import torre.modo_ataque.AtacaJuntos;
+import torre.modo_ataque.AtacaLonge;
+import torre.modo_ataque.AtacaPerto;
+import torre.modo_ataque.AtacaPrimeiro;
+import torre.modo_ataque.AtacaUltimo;
+import torre.modo_ataque.EstrategiaModoAtaque;
+import torre.modo_ataque.ModoAtaque;
 
 import javax.swing.border.TitledBorder;
 
@@ -26,27 +34,25 @@ public class ConfiguradorTorres extends JPanel {
 	private Torre escolhida;
 
 	/** mapeia os modos de ataque ao respetivo botão */
-	private LinkedHashMap<Integer, JToggleButton> botoes = new LinkedHashMap<>();
+	private LinkedHashMap<EstrategiaModoAtaque, JToggleButton> botoes = new LinkedHashMap<>();
 
 	/**
 	 * Cria os vários botões para os vários modos de ataque
 	 */
 	private void criarBotoesAtaques(JPanel painelAtaques) {
-		// TODO acrescentar os novos modos de ataque
-		painelAtaques.add(criarBotaoAtaque("Primeiro", Torre.ATACA_PRIMEIRO));
-		painelAtaques.add(criarBotaoAtaque("Último", Torre.ATACA_ULTIMO));
-
-		painelAtaques.add(criarBotaoAtaque("Perto", Torre.ATACA_PERTO));
-		painelAtaques.add(criarBotaoAtaque("Longe", -1));
-
-		painelAtaques.add(criarBotaoAtaque("Forte", -1));
-		painelAtaques.add(criarBotaoAtaque("Juntos", Torre.ATACA_JUNTOS));
+		// TODO DONE acrescentar os novos modos de ataque
+		painelAtaques.add(criarBotaoAtaque("Primeiro", new AtacaPrimeiro()));
+		painelAtaques.add(criarBotaoAtaque("Último", new AtacaUltimo()));
+		painelAtaques.add(criarBotaoAtaque("Perto", new AtacaPerto()));
+		painelAtaques.add(criarBotaoAtaque("Longe", new AtacaLonge()));
+		painelAtaques.add(criarBotaoAtaque("Forte", new AtacaForte()));
+		painelAtaques.add(criarBotaoAtaque("Juntos", new AtacaJuntos()));
 	}
 
 	/**
 	 * método utilizado para definir qual a torre escolhida, ou seja, qual a que
 	 * está a ser modificada
-	 * 
+	 *
 	 * @param t a torre a ser modificada
 	 */
 	public void setSelecionada(Torre t) {
@@ -61,12 +67,12 @@ public class ConfiguradorTorres extends JPanel {
 
 	/**
 	 * Cria um botão para um modo de ataque
-	 * 
+	 *
 	 * @param texto      o texto a colocar no botão
 	 * @param modoAtaque o modo de ataque
 	 * @return o botão criado
 	 */
-	private JToggleButton criarBotaoAtaque(String texto, int modoAtaque) {
+	private JToggleButton criarBotaoAtaque(String texto, EstrategiaModoAtaque modoAtaque) {
 		JToggleButton button = new JToggleButton(texto);
 		button.setPreferredSize(new Dimension(60, 18));
 		button.setMargin(new Insets(0, 0, 0, 0));

@@ -7,6 +7,7 @@ import java.util.List;
 import bloon.Bloon;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
+import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Projetil;
 
 /**
@@ -16,37 +17,29 @@ import torre.projetil.Projetil;
 public interface Torre extends Cloneable {
 
 	/**
-	 * constantes que definem o modo de ataque das torres
-	 */
-	public static final int ATACA_PRIMEIRO = 0;
-	public static final int ATACA_ULTIMO = ATACA_PRIMEIRO + 1;
-	public static final int ATACA_PERTO = ATACA_ULTIMO + 1;
-	public static final int ATACA_JUNTOS = ATACA_PERTO + 1;
-
-	/**
 	 * Define a posição no écran da torre
-	 * 
+	 *
 	 * @param p a nova posição
 	 */
 	public void setPosicao(Point p);
 
 	/**
 	 * Define o mundo onde a torre está
-	 * 
+	 *
 	 * @param m o mundo
 	 */
 	public void setMundo(Mundo m);
 
 	/**
 	 * Retorna o mundo onde está a torre
-	 * 
+	 *
 	 * @return o mundo onde está a torre
 	 */
 	public Mundo getMundo();
 
 	/**
 	 * devolve qual o componente visual da torre
-	 * 
+	 *
 	 * @return o componente visual da torre
 	 */
 	public ComponenteMultiAnimado getComponente();
@@ -54,7 +47,7 @@ public interface Torre extends Cloneable {
 	/**
 	 * faz uma jogada de ataque aos bloons. O resultado de cada ataque é uma série
 	 * de projéteis
-	 * 
+	 *
 	 * @param bloons lista de bloons a atacar
 	 * @return os projéteis lançados pela torre
 	 */
@@ -62,23 +55,23 @@ public interface Torre extends Cloneable {
 
 	/**
 	 * define o modo de ataque da torre.
-	 * 
+	 *
 	 * @param mode modo de ataque
 	 */
-	public void setModoAtaque(int mode);
+	public void setModoAtaque(EstrategiaModoAtaque mode);
 
 	/**
 	 * devolve o modo de ataque da torre.
-	 * 
+	 *
 	 * @return o modo de ataque
 	 */
-	public int getModoAtaque();
+	public EstrategiaModoAtaque getModoAtaque();
 
 	/**
 	 * define qual o raio de accao da torre. O raio de accao
 	 * é a distância máxima a que a torre consegue visualizar
 	 * os inimigos
-	 * 
+	 *
 	 * @param raio o novo raio de accao
 	 */
 	public void setRaioAcao(int raio);
@@ -87,7 +80,7 @@ public interface Torre extends Cloneable {
 	 * devolve o raio de ação da torre. O raio de ação
 	 * é a distância máxima a que a torre consegue visualizar
 	 * os inimigos
-	 * 
+	 *
 	 * @return o raio de ação da torre
 	 */
 	public int getRaioAcao();
@@ -100,22 +93,30 @@ public interface Torre extends Cloneable {
 
 	/**
 	 * desenha a torre
-	 * 
+	 *
 	 * @param g ambiente onde desenhar a torre
 	 */
 	public void desenhar(Graphics2D g);
 
 	/**
 	 * Desenha o alcance da torre
-	 * 
+	 *
 	 * @param g sistema gráfico onde desenhar
 	 */
 	public void desenhaRaioAcao(Graphics2D g);
 
 	/**
 	 * Cria um clone desta torre
-	 * 
+	 *
 	 * @return uma torre igual à original
 	 */
 	public Torre clone();
+
+	public Point escolherAlvo(List<Bloon> alvosPossiveis, Point centro);
+
+	public double escolherAngulo(ComponenteMultiAnimado anim, Point posAlvo);
+
+	public Projetil[] criarProjetil(Point shoot, double angle);
+
+	public List<Bloon> getAlvosPossiveis(List<Bloon> bloons);
 }

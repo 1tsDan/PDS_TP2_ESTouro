@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreFactory;
+import torre.factory.TorreMacacoFactory;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
 
@@ -14,6 +16,8 @@ import torre.projetil.Projetil;
  */
 public class TorreMacaco extends TorreDefault {
 
+	private static final TorreFactory FACTORY = new TorreMacacoFactory();
+
 	/**
 	 * Cria a torre macaco
 	 *
@@ -21,16 +25,17 @@ public class TorreMacaco extends TorreDefault {
 	 */
 	public TorreMacaco(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 3), 30, 8, new Point(15, 15), 100);
+		setFactory(FACTORY);
 	}
 
 	@Override
-    public Projetil[] criarProjetil(Point shoot, double angle){
-        Projetil p[] = new Projetil[1];
+	public Projetil[] criarProjetil(Point shoot, double angle) {
+		Projetil p[] = new Projetil[1];
 		ComponenteVisual img = new ComponenteAnimado(new Point(),
 				(BufferedImage) ImageLoader.getLoader().getImage("data/torres/dardo.gif"), 2, 2);
 		p[0] = new Dardo(img, angle, 10, 2);
 		p[0].setPosicao(shoot);
 		p[0].setAlcance(getRaioAcao() + 30);
 		return p;
-    }
+	}
 }

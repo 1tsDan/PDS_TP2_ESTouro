@@ -7,6 +7,8 @@ import java.util.List;
 import bloon.Bloon;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreFactory;
+import torre.factory.TorreOctogonalFactory;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
 
@@ -16,12 +18,13 @@ import torre.projetil.Projetil;
  * raio de ação.
  */
 public class TorreOctogonal extends TorreDefault {
-
+	private static final TorreFactory FACTORY = new TorreOctogonalFactory();
 	private double baseAngle = 0;
 
 	public TorreOctogonal(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
 				20, 6, new Point(0, 0), 100);
+        setFactory(FACTORY);
 	}
 
     @Override

@@ -16,6 +16,7 @@ import prof.jogos2D.image.ComponenteMultiAnimado;
 import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreFactory;
 import torre.modo_ataque.AtacaPrimeiro;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Dardo;
@@ -27,6 +28,7 @@ import torre.projetil.Projetil;
  */
 public abstract class TorreDefault implements Torre {
 
+    private TorreFactory factory;
     private Mundo mundo; // mundo onde está a torre
     private ComponenteMultiAnimado imagem; // desenho da torre
     protected EstrategiaModoAtaque modoAtaque = new AtacaPrimeiro(); // modo de ataque da torre
@@ -60,6 +62,15 @@ public abstract class TorreDefault implements Torre {
         this.frameDisparoDelay = delayDisparo;
         this.pontoDisparo = Objects.requireNonNull(pontoDisparo);
         this.raioAtaque = raioAtaque;
+    }
+
+    @Override
+    public TorreFactory getFactory() {
+        return factory;
+    }
+
+    protected void setFactory(TorreFactory f) {
+        factory = Objects.requireNonNull(f);
     }
 
     protected void atualizarCicloDisparo() {

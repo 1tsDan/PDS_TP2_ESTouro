@@ -11,6 +11,9 @@ import prof.jogos2D.image.ComponenteSimples;
 import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreBalistaFactory;
+import torre.factory.TorreFactory;
+import torre.factory.TorreNinjaFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
@@ -21,6 +24,8 @@ import torre.projetil.Projetil;
  */
 public class TorreNinja extends TorreDefault {
 
+    private static final TorreFactory FACTORY = new TorreNinjaFactory();
+
     private boolean dardos = false;
 
     /**
@@ -30,6 +35,7 @@ public class TorreNinja extends TorreDefault {
      */
     public TorreNinja(BufferedImage img) {
         super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 3), 30, 8, new Point(20, 0), 100);
+        setFactory(FACTORY);
     }
 
     @Override

@@ -8,6 +8,8 @@ import bloon.Bloon;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreFactory;
+import torre.factory.TorreMorteiroFactory;
 import torre.projetil.BombaDirigida;
 import torre.projetil.Projetil;
 
@@ -18,6 +20,7 @@ import torre.projetil.Projetil;
  */
 public class TorreMorteiro extends TorreDefault {
 
+    private static final TorreFactory FACTORY = new TorreMorteiroFactory();
     private Point areaAlvo; // destino das bombas
     private int alcance; // alcance máximo da torre
 
@@ -31,6 +34,7 @@ public class TorreMorteiro extends TorreDefault {
                 30, 0, new Point(30, 15), 0);
         areaAlvo = new Point(100, 100);
         alcance = 200;
+        setFactory(FACTORY);
     }
 
     /**

@@ -13,6 +13,8 @@ import java.util.List;
 import bloon.Bloon;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreBalistaFactory;
+import torre.factory.TorreFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
@@ -22,6 +24,8 @@ import torre.projetil.Projetil;
  * potente na direção especificada pelo jogador.
  */
 public class TorreBalista extends TorreDefault {
+
+    private static final TorreFactory FACTORY = new TorreBalistaFactory();
 
 	/** ponto para onde a balista faz pontaria */
 	private Point mira;
@@ -35,6 +39,7 @@ public class TorreBalista extends TorreDefault {
 		super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
 				20, 0, new Point(20, -3), 100);
 		setAnguloDisparo(0);
+        setFactory(FACTORY);
 	}
 
 	/**

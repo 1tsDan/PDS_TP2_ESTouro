@@ -6,6 +6,7 @@ import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import torre.Torre;
 import torre.TorreMorteiro;
 
 /**
@@ -13,11 +14,10 @@ import torre.TorreMorteiro;
  * para a qual o morteiro dispara.
  */
 public class ManipuladorMorteiro extends ManipuladorVazio {
-
 	// composite para usar transparências nas miras
 	private static final AlphaComposite transp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 
-	public ManipuladorMorteiro(TorreMorteiro t) {
+	public ManipuladorMorteiro(Torre t) {
 		super(t);
 	}
 

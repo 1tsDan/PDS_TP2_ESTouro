@@ -228,9 +228,9 @@ public class BloonCreator {
 		BloonFabricante metalZep = new BloonFabricante(imagem, imagemPop, 2.3f, 30, 45, 30);
 
 		// TODO DONE o verde e o amarelo têm de ter uma armadura que rebenta ao fim de 8
-		Bloon verde = new BloonComArmadura(criarVerde(),8);
+		Bloon verde = new BloonComArmadura(criarVerde(),8, armaduraImg);
 		metalZep.addBloonProvavel(verde);
-		Bloon amarelo = new BloonComArmadura(criarAmarelo(),8);
+		Bloon amarelo = new BloonComArmadura(criarAmarelo(),8, armaduraImg);
 		metalZep.addBloonProvavel(amarelo);
 		return new BloonImunePerfurantes(metalZep);
 	}
@@ -244,9 +244,9 @@ public class BloonCreator {
 		BloonFabricante pretoZep = new BloonFabricante(imagem, imagemPop, 2.7f, 30, 45, 30);
 
 		// TODO DONE o amarelo e o rosa devem ter um escudo que parte ao fim de 12 contactos
-		Bloon amarelo = new BloonComEscudo(criarAmarelo(),12);
+		Bloon amarelo = new BloonComEscudo(criarAmarelo(),12, escudoImg);
 		pretoZep.addBloonProvavel(amarelo);
-		Bloon rosa = new BloonComEscudo(criarRosa(),12);
+		Bloon rosa = new BloonComEscudo(criarRosa(),12, escudoImg);
 		pretoZep.addBloonProvavel(rosa);
 		return new BloonImuneExplosivos(pretoZep);
 	}

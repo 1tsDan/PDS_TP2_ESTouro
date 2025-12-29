@@ -39,3 +39,9 @@ Ninja
 500
 Alterna entre atirar 3 shurikans ou 1 granada.
 </torre>
+<torre>
+sniper
+Sniper
+700
+Atira um dardo na direção em que está virada sem limite de alcance
+</torre>

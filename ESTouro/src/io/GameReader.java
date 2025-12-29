@@ -20,7 +20,7 @@ public class GameReader {
 
 	/**
 	 * lê o ficheiro com a informação do jogo
-	 * 
+	 *
 	 * @param file nome do ficheiro com o jogo gravado
 	 * @throws IOException quando corre algo mal na leitura
 	 */
@@ -46,9 +46,10 @@ public class GameReader {
 				switch (info[2]) {
 					case "octo":
 					case "balista":
-						double angulo = Double.parseDouble(info[3]);
-						torres[i].getComponente().setAngulo(angulo);
-						break;
+                    case "sniper":
+                        double ang = Double.parseDouble(info[3]);
+                        torres[i].getComponente().setAngulo(ang);
+                        break;
 					case "morteiro":
 						int ax = Integer.parseInt(info[3]);
 						int ay = Integer.parseInt(info[4]);

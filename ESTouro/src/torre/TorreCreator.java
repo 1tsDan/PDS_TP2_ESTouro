@@ -15,7 +15,7 @@ public class TorreCreator {
 
 	/**
 	 * cria a torre com um dado nome
-	 * 
+	 *
 	 * @param nome nome da torre a criar
 	 * @return a torre criada, ou null se não existir torre com o nome dado
 	 */
@@ -34,6 +34,8 @@ public class TorreCreator {
 				return criarBalista();
 			case "ninja":
 				return criarNinja();
+			case "sniper":
+				return criarSniper();
 		}
 		return null;
 	}
@@ -74,4 +76,9 @@ public class TorreCreator {
 		return new TorreNinja((BufferedImage) img);
 	}
 
+	/** Cria uma torre sniper */
+	public Torre criarSniper() {
+		Image img = loader.getImage("data/torres/sniper/imagem.gif");
+		return new TorreSniper((BufferedImage) img);
+	}
 }

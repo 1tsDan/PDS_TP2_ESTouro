@@ -82,7 +82,7 @@ public class BloonDecorator implements Bloon {
 
     @Override
     public Rectangle getBounds() {
-       return decorado.getBounds();
+        return decorado.getBounds();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class BloonDecorator implements Bloon {
 
     @Override
     public void setValor(int val) {
-       decorado.setValor(val);
+        decorado.setValor(val);
     }
 
     @Override
@@ -118,5 +118,10 @@ public class BloonDecorator implements Bloon {
     @Override
     public void removeBloonObserver(BloonObserver bo) {
         decorado.removeBloonObserver(bo);
+    }
+
+    @Override
+    public Bloon clone() {
+        return decorado.clone();
     }
 }

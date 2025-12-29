@@ -18,7 +18,7 @@ public class BloonFabricante extends BloonSimples {
 
     /**
      * Cria um bloon que fabrica outros bloons
-     * 
+     *
      * @param imagem       imagem do bloon
      * @param imagemPop    imagem de quando o bloon rebenta
      * @param veloc        velocidade de deslocamento
@@ -35,7 +35,7 @@ public class BloonFabricante extends BloonSimples {
 
     /**
      * Adiciona um bloon à lista dos bloons prováveis
-     * 
+     *
      * @param b o bloon a poder ser criado
      */
     public void addBloonProvavel(Bloon b) {
@@ -57,14 +57,25 @@ public class BloonFabricante extends BloonSimples {
             int pos = getPosicaoNoCaminho();
             if (getCaminho().getPoint(pos + pathOffset) == null)
                 pathOffset = 0;
-            // TODO esta parte tem de ser revista pois está a usar repetidamente os mesmos
+            // TODO DONE esta parte tem de ser revista pois está a usar repetidamente os mesmos
             // bloons
             Bloon escolhido = provaveis.get(idx);
-            escolhido.setCaminho(getCaminho());
-            getMundo().addBloonPendente(escolhido);
-            escolhido.setPosicaoNoCaminho(pos + pathOffset);
-            getObservers().forEach(o -> escolhido.addBloonObserver(o));
+            Bloon copiaBloon = escolhido.clone();
+            copiaBloon.setCaminho(getCaminho());
+            getMundo().addBloonPendente(copiaBloon);
+            copiaBloon.setPosicaoNoCaminho(pos + pathOffset);
+            getObservers().forEach(o -> copiaBloon.addBloonObserver(o));
             proximaCriacao = ritmoCriacao;
         }
+    }
+
+    @Override
+    public Bloon clone() {
+        BloonFabricante copia = (BloonFabricante) super.clone();
+        copia.provaveis = new ArrayList<>();
+        for (Bloon b : provaveis) {
+            copia.provaveis.add(b);
+        }
+        return copia;
     }
 }

@@ -14,7 +14,7 @@ import prof.jogos2D.image.*;
  * tipos de bloons, pelo que define vários métodos e campos comuns a todos os
  * bloons. Contém também alguns métodos auxiliares para as subclasses.
  */
-public class BloonSimples implements Bloon {
+public class BloonSimples implements Bloon, Cloneable {
 
 	/**
 	 * variáveis comuns aos bloons
@@ -45,7 +45,7 @@ public class BloonSimples implements Bloon {
 
 	/**
 	 * permite a um componente definir qual o seu aspeto
-	 * 
+	 *
 	 * @param v o novo aspeto do componente
 	 */
 	protected void setComponente(ComponenteVisual v) {
@@ -173,7 +173,7 @@ public class BloonSimples implements Bloon {
 
 	/**
 	 * Diminui a resistência do bloon de acordo com o impacto que recebeu
-	 * 
+	 *
 	 * @param estrago o estrago infligido pelo impacto
 	 * @return o estrago sobrante
 	 */
@@ -199,7 +199,7 @@ public class BloonSimples implements Bloon {
 
 	/**
 	 * retorna a lista de observadores
-	 * 
+	 *
 	 * @return a lista de observadores
 	 */
 	protected List<BloonObserver> getObservers() {
@@ -221,4 +221,22 @@ public class BloonSimples implements Bloon {
 		for (int i = obs.size() - 1; i >= 0; i--)
 			obs.get(i).bloonEscapou(this);
 	}
+
+	@Override
+    public Bloon clone(){
+        try {
+            BloonSimples copia = (BloonSimples) super.clone();
+
+            copia.imagem = imagem.clone();
+            copia.imagemPop = imagemPop.clone();
+            copia.caminho = null;
+            copia.mundo = null;
+            copia.posCaminho = 0;
+            copia.obs = new ArrayList<BloonObserver>();
+
+			return copia;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

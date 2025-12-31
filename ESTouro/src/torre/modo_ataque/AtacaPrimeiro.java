@@ -7,6 +7,15 @@ import bloon.Bloon;
 import java.awt.Point;
 
 public class AtacaPrimeiro implements EstrategiaModoAtaque {
+    private static final AtacaPrimeiro INSTANCIA = new AtacaPrimeiro();
+
+    private AtacaPrimeiro() {
+    }
+
+    public static EstrategiaModoAtaque getInstancia() {
+        return INSTANCIA;
+    }
+
 	@Override
 	public Point escolherAlvo(List<Bloon> bloons, Point centro) {
 		return bloons.stream().max((b1, b2) -> b1.getPosicaoNoCaminho() - b2.getPosicaoNoCaminho()).get().getComponente().getPosicaoCentro();

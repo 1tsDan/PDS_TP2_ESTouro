@@ -2,6 +2,8 @@ package bloon;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
@@ -12,6 +14,25 @@ import prof.jogos2D.util.ImageLoader;
 public class BloonCreator {
 
 	private ImageLoader loader = ImageLoader.getLoader();
+    private Map<String, Bloon> bloons = new HashMap<>();
+
+    public BloonCreator() {
+        bloons.put("vermelho", criarVermelho());
+        bloons.put("azul", criarAzul());
+        bloons.put("verde", criarVerde());
+        bloons.put("amarelo", criarAmarelo());
+        bloons.put("rosa", criarRosa());
+        bloons.put("metal", criarMetal());
+        bloons.put("barro", criarBarro());
+        bloons.put("preto", criarPreto());
+        bloons.put("branco", criarBranco());
+        bloons.put("zep_azul", criarZeppelinAzul());
+        bloons.put("zep_verde", criarZeppelinVerde());
+        bloons.put("zep_amarelo", criarZeppelinAmarelo());
+        bloons.put("zep_rosa", criarZeppelinRosa());
+        bloons.put("zep_metal", criarZeppelinMetal());
+        bloons.put("zep_preto", criarZeppelinPreto());
+    }
 
 	/**
 	 * método que cria o bloon com um determinado nome de código
@@ -20,7 +41,8 @@ public class BloonCreator {
 	 * @return o bloon criado, ou null caso seja um nome inválido
 	 */
 	public Bloon criarBloon(String nome) {
-		switch (nome) {
+        return bloons.get(nome).clone();
+		/*switch (nome) {
 			case "vermelho":
 				return criarVermelho();
 			case "azul":
@@ -52,7 +74,7 @@ public class BloonCreator {
 			case "zep_preto":
 				return criarZeppelinPreto();
 		}
-		return null;
+		return null;*/
 	}
 
 	private ComponenteVisual getImagem(String nome) {

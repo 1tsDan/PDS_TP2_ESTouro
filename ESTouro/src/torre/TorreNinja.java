@@ -17,6 +17,7 @@ import torre.factory.TorreNinjaFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
+import torre.visitor.VisitanteTorre;
 
 /**
  * Classe que representa a torre ninja. Esta torre dispara alternadamente 3
@@ -59,5 +60,10 @@ public class TorreNinja extends TorreDefault {
             p[0].setAlcance(getRaioAcao() + 20);
             return p;
         }
+    }
+
+    @Override
+    public void aceita(VisitanteTorre v) {
+        v.visitaTorreNinja();
     }
 }

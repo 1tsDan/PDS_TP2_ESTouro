@@ -10,6 +10,7 @@ import prof.jogos2D.image.ComponenteMultiAnimado;
 import torre.factory.TorreFactory;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Projetil;
+import torre.visitor.VisitanteTorre;
 
 /**
  * Interface que representa o comportamento que as torres devem ter. As torres
@@ -55,6 +56,12 @@ public interface Torre extends Cloneable {
 	 * @return os projéteis lançados pela torre
 	 */
 	public Projetil[] atacar(List<Bloon> bloons);
+
+    public void addModoAtaque(EstrategiaModoAtaque modo);
+
+    public void removeModoAtaque(EstrategiaModoAtaque modo);
+
+    public List<EstrategiaModoAtaque> getModosAtaque();
 
 	/**
 	 * define o modo de ataque da torre.
@@ -122,4 +129,6 @@ public interface Torre extends Cloneable {
 	public Projetil[] criarProjetil(Point shoot, double angle);
 
 	public List<Bloon> getAlvosPossiveis(List<Bloon> bloons);
+
+    public void aceita(VisitanteTorre visitante);
 }

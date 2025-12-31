@@ -16,7 +16,6 @@ import torre.modo_ataque.AtacaPerto;
 import torre.modo_ataque.AtacaPrimeiro;
 import torre.modo_ataque.AtacaUltimo;
 import torre.modo_ataque.EstrategiaModoAtaque;
-import torre.modo_ataque.ModoAtaque;
 
 import javax.swing.border.TitledBorder;
 
@@ -41,12 +40,12 @@ public class ConfiguradorTorres extends JPanel {
 	 */
 	private void criarBotoesAtaques(JPanel painelAtaques) {
 		// TODO DONE acrescentar os novos modos de ataque
-		painelAtaques.add(criarBotaoAtaque("Primeiro", new AtacaPrimeiro()));
-		painelAtaques.add(criarBotaoAtaque("Último", new AtacaUltimo()));
-		painelAtaques.add(criarBotaoAtaque("Perto", new AtacaPerto()));
-		painelAtaques.add(criarBotaoAtaque("Longe", new AtacaLonge()));
-		painelAtaques.add(criarBotaoAtaque("Forte", new AtacaForte()));
-		painelAtaques.add(criarBotaoAtaque("Juntos", new AtacaJuntos()));
+		painelAtaques.add(criarBotaoAtaque("Primeiro", AtacaPrimeiro.getInstancia()));
+		painelAtaques.add(criarBotaoAtaque("Último", AtacaUltimo.getInstancia()));
+		painelAtaques.add(criarBotaoAtaque("Perto", AtacaPerto.getInstancia()));
+		painelAtaques.add(criarBotaoAtaque("Longe", AtacaLonge.getInstancia()));
+		painelAtaques.add(criarBotaoAtaque("Forte", AtacaForte.getInstancia()));
+		painelAtaques.add(criarBotaoAtaque("Juntos", AtacaJuntos.getInstancia()));
 	}
 
 	/**

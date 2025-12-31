@@ -9,6 +9,15 @@ import java.util.stream.Collectors;
 import bloon.Bloon;
 
 public class AtacaJuntos implements EstrategiaModoAtaque {
+    private static final AtacaJuntos INSTANCIA = new AtacaJuntos();
+
+    private AtacaJuntos() {
+    }
+    
+    public static EstrategiaModoAtaque getInstancia() {
+        return INSTANCIA;
+    }
+
     @Override
     public Point escolherAlvo(List<Bloon> bloons, Point centro) {
         Map<Integer, List<Bloon>> posicoes = bloons.stream()

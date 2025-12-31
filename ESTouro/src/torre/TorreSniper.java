@@ -19,6 +19,7 @@ import torre.factory.TorreSniperFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
+import torre.visitor.VisitanteTorre;
 
 /**
  * Classe que representa a torre balista. Esta torre dispara 1 dardo enorme e
@@ -35,7 +36,7 @@ public class TorreSniper extends TorreDefault {
 
 	public TorreSniper(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
-				20, 0, new Point(20, -3), ALCANCE);
+				30, 0, new Point(20, -3), ALCANCE);
 		setAnguloDisparo(0);
         setFactory(FACTORY);
 	}
@@ -55,6 +56,13 @@ public class TorreSniper extends TorreDefault {
 	public Point getMira() {
 		return mira;
 	}
+
+    @Override
+    public Torre clone() {
+        TorreSniper copia = (TorreSniper) super.clone();
+        copia.mira = new Point(mira);
+        return copia;
+    }
 
 	@Override
 	public void setPosicao(Point p) {
@@ -79,6 +87,11 @@ public class TorreSniper extends TorreDefault {
 	}
 
     @Override
+    public List<Bloon> getAlvosPossiveis(List<Bloon> bloons) {
+        return getBloonsInLine(bloons, getComponente().getPosicaoCentro(), mira);
+    }
+
+    @Override
     public Point escolherAlvo(List<Bloon> alvosPossiveis, Point centro){
         Point alvo = super.escolherAlvo(alvosPossiveis, centro);
         pontoDisparoInicial = alvo;
@@ -93,17 +106,16 @@ public class TorreSniper extends TorreDefault {
     @Override
     public Projetil[] criarProjetil(Point shoot, double angle){
         Projetil p[] = new Projetil[1];
-		ComponenteVisual img = new ComponenteSimples(ImageLoader.getLoader().getImage("data/torres/dard.gif"));
+
+		ComponenteVisual img = new ComponenteSimples(ImageLoader.getLoader().getImage("data/torres/dardo.gif"));
 		p[0] = new Dardo(img, angle, 10, 5);
 		p[0].setPosicao(pontoDisparoInicial);
-		p[0].setAlcance(getRaioAcao() + 50);
+		p[0].setAlcance(getRaioAcao());
 		return p;
     }
 
-	@Override
-	public Torre clone() {
-		TorreSniper copia = (TorreSniper) super.clone();
-		copia.mira = new Point(mira);
-		return copia;
-	}
+    @Override
+    public void aceita(VisitanteTorre v) {
+        v.visitaTorreSniper();
+    }
 }

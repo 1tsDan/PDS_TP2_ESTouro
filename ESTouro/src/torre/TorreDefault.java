@@ -6,6 +6,7 @@ import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,10 +18,16 @@ import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
 import torre.factory.TorreFactory;
+import torre.modo_ataque.AtacaForte;
+import torre.modo_ataque.AtacaJuntos;
+import torre.modo_ataque.AtacaLonge;
+import torre.modo_ataque.AtacaPerto;
 import torre.modo_ataque.AtacaPrimeiro;
+import torre.modo_ataque.AtacaUltimo;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
+import torre.visitor.VisitanteTorre;
 
 /**
  * Classe que implementa os comportamentos e variáveis comuns a todos as torres.
@@ -31,7 +38,8 @@ public abstract class TorreDefault implements Torre {
     private TorreFactory factory;
     private Mundo mundo; // mundo onde está a torre
     private ComponenteMultiAnimado imagem; // desenho da torre
-    protected EstrategiaModoAtaque modoAtaque = new AtacaPrimeiro(); // modo de ataque da torre
+    private List<EstrategiaModoAtaque> modosAtaque; // modos de ataque disponíveis na torre
+    protected EstrategiaModoAtaque modoAtaque = AtacaPrimeiro.getInstancia(); // modo de ataque da torre
     private int raioAtaque; // raio de ataque, isto é, área circular onde consegue detetar bloons
     private Point pontoDisparo; // ponto de onde sai o disparo
 
@@ -62,6 +70,19 @@ public abstract class TorreDefault implements Torre {
         this.frameDisparoDelay = delayDisparo;
         this.pontoDisparo = Objects.requireNonNull(pontoDisparo);
         this.raioAtaque = raioAtaque;
+        modosAtaque = new ArrayList<>(List.of(
+                AtacaPrimeiro.getInstancia(),
+                AtacaJuntos.getInstancia(),
+                AtacaUltimo.getInstancia(),
+                AtacaForte.getInstancia(),
+                AtacaLonge.getInstancia(),
+                AtacaPerto.getInstancia()));
+    }
+
+    public TorreDefault(ComponenteMultiAnimado cv, int ritmoDisparo, int delayDisparo, Point pontoDisparo,
+            int raioAtaque, List<EstrategiaModoAtaque> modos) {
+        this(cv, ritmoDisparo, delayDisparo, pontoDisparo, raioAtaque);
+        modosAtaque = new ArrayList<>(modos);
     }
 
     @Override
@@ -151,7 +172,24 @@ public abstract class TorreDefault implements Torre {
     }
 
     @Override
+    public void addModoAtaque(EstrategiaModoAtaque modo) {
+        modosAtaque.add(Objects.requireNonNull(modo));
+    }
+
+    @Override
+    public void removeModoAtaque(EstrategiaModoAtaque modo) {
+        modosAtaque.remove(modo);
+    }
+
+    @Override
+    public List<EstrategiaModoAtaque> getModosAtaque() {
+        return modosAtaque;
+    }
+
+    @Override
     public void setModoAtaque(EstrategiaModoAtaque modo) {
+        if(!modosAtaque.contains(modo))
+            return;
         modoAtaque = modo;
     }
 
@@ -215,13 +253,13 @@ public abstract class TorreDefault implements Torre {
         if (alvosPossiveis.size() == 0)
             return new Projetil[0];
         // TODO DONE remover este switch e suportar os restantes modos de ataque
-		Point centro = getComponente().getPosicaoCentro();
+        Point centro = getComponente().getPosicaoCentro();
         Point posAlvo = escolherAlvo(alvosPossiveis, centro);
         if (posAlvo == null)
             return new Projetil[0];
 
         // ver o ângulo que o alvo faz com a torre, para assim rodar esta
-        double angle = escolherAngulo(anim,posAlvo);
+        double angle = escolherAngulo(anim, posAlvo);
 
         // se vai disparar daqui a pouco, começamos já com a animação de ataque
         // para sincronizar a frame de disparo com o disparo real
@@ -253,7 +291,7 @@ public abstract class TorreDefault implements Torre {
 
     @Override
     public Point escolherAlvo(List<Bloon> alvosPossiveis, Point centro) {
-		return modoAtaque.escolherAlvo(alvosPossiveis, centro);
+        return modoAtaque.escolherAlvo(alvosPossiveis, centro);
     }
 
     @Override
@@ -272,5 +310,10 @@ public abstract class TorreDefault implements Torre {
         p[0].setPosicao(shoot);
         p[0].setAlcance(getRaioAcao() + 30);
         return p;
+    }
+
+    @Override
+    public void aceita(VisitanteTorre visitante) {
+        
     }
 }

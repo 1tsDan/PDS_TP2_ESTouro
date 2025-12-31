@@ -13,28 +13,34 @@ import torre.factory.TorreCanhaoFactory;
 import torre.factory.TorreFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Projetil;
+import torre.visitor.VisitanteTorre;
+
 /**
  * Classe que representa a torre canhão. Esta torre dispara uma bomba que
  * explode ao contato com os bloons. Só dispara quando tem bloons dentro do seu
  * raio de ação e atira para o bloon de acordo com o seu modo de ataque
  */
 public class TorreCanhao extends TorreDefault {
-    private static final TorreFactory FACTORY = new TorreCanhaoFactory();
+	private static final TorreFactory FACTORY = new TorreCanhaoFactory();
 
 	public TorreCanhao(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 2),
 				30, 0, new Point(25, 0), 120);
-        setFactory(FACTORY);
+		setFactory(FACTORY);
 	}
 
-    @Override
-    public Projetil[] criarProjetil(Point shoot, double angle){
-        Projetil p[] = new Projetil[1];
+	@Override
+	public Projetil[] criarProjetil(Point shoot, double angle) {
+		Projetil p[] = new Projetil[1];
 		ComponenteVisual img = new ComponenteSimples(ImageLoader.getLoader().getImage("data/torres/bomba.gif"));
 		p[0] = new BombaImpacto(img, angle, 12, 2, getMundo());
 		p[0].setPosicao(shoot);
 		p[0].setAlcance(getRaioAcao() + 20);
 		return p;
-    }
-}
+	}
 
+	@Override
+	public void aceita(VisitanteTorre v) {
+		v.visitaTorreCanhao();
+	}
+}

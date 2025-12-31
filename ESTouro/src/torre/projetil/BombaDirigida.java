@@ -26,7 +26,7 @@ public class BombaDirigida extends ProjetilDefault {
 
 	/**
 	 * Cria a bomba
-	 * 
+	 *
 	 * @param img     imagem da bomba
 	 * @param dir     direção do movimento
 	 * @param veloc   velocidade do movimento
@@ -43,7 +43,7 @@ public class BombaDirigida extends ProjetilDefault {
 
 	/**
 	 * define o ponto de ataque da bomba
-	 * 
+	 *
 	 * @param p ponto de ataque
 	 */
 	public void setDestino(Point p) {

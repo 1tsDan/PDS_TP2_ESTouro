@@ -2,8 +2,11 @@ package torre;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 import prof.jogos2D.util.ImageLoader;
+import torre.factory.TorreFactory;
 
 /**
  * Classe que trata da criação das várias torres. Esta classe existe que lidar
@@ -12,6 +15,17 @@ import prof.jogos2D.util.ImageLoader;
  */
 public class TorreCreator {
 	private ImageLoader loader = ImageLoader.getLoader();
+    private Map<String, Torre> torres = new HashMap<>();
+
+    public TorreCreator() {
+        torres.put("octo", new TorreOctogonal((BufferedImage) loader.getImage("data/torres/octo/imagem.gif")));
+        torres.put("macaco", new TorreMacaco((BufferedImage) loader.getImage("data/torres/macaco/imagem.gif")));
+        torres.put("canhao", new TorreCanhao((BufferedImage) loader.getImage("data/torres/canhao/imagem.gif")));
+        torres.put("morteiro", new TorreMorteiro((BufferedImage) loader.getImage("data/torres/morteiro/imagem.gif")));
+        torres.put("balista", new TorreBalista((BufferedImage) loader.getImage("data/torres/balista/imagem.gif")));
+        torres.put("ninja", new TorreNinja((BufferedImage) loader.getImage("data/torres/ninja/imagem.gif")));
+        torres.put("sniper", new TorreSniper((BufferedImage) loader.getImage("data/torres/sniper/imagem.gif")));
+    }
 
 	/**
 	 * cria a torre com um dado nome
@@ -20,8 +34,9 @@ public class TorreCreator {
 	 * @return a torre criada, ou null se não existir torre com o nome dado
 	 */
 	public Torre criarTorrePorNome(String nome) {
-		// TODO suportar também a Sniper
-		switch (nome) {
+		// TODO DONE suportar também a Sniper
+        return torres.get(nome).clone();
+		/*switch (nome) {
 			case "octo":
 				return criarOctogonal();
 			case "macaco":
@@ -37,48 +52,6 @@ public class TorreCreator {
 			case "sniper":
 				return criarSniper();
 		}
-		return null;
-	}
-
-	/** Cria uma torre octogonal */
-	public Torre criarOctogonal() {
-		Image img = loader.getImage("data/torres/octo/imagem.gif");
-		return new TorreOctogonal((BufferedImage) img);
-	}
-
-	/** Cria uma torre macaco */
-	public Torre criarMacaco() {
-		Image img = loader.getImage("data/torres/macaco/imagem.gif");
-		return new TorreMacaco((BufferedImage) img);
-	}
-
-	/** Cria uma torre canhão */
-	public Torre criarCanhao() {
-		Image img = loader.getImage("data/torres/canhao/imagem.gif");
-		return new TorreCanhao((BufferedImage) img);
-	}
-
-	/** Cria uma torre morteiro */
-	public Torre criarMorteiro() {
-		Image img = loader.getImage("data/torres/morteiro/imagem.gif");
-		return new TorreMorteiro((BufferedImage) img);
-	}
-
-	/** Cria uma torre balista */
-	public Torre criarBalista() {
-		Image img = loader.getImage("data/torres/balista/imagem.gif");
-		return new TorreBalista((BufferedImage) img);
-	}
-
-	/** Cria uma torre ninja */
-	public Torre criarNinja() {
-		Image img = loader.getImage("data/torres/ninja/imagem.gif");
-		return new TorreNinja((BufferedImage) img);
-	}
-
-	/** Cria uma torre sniper */
-	public Torre criarSniper() {
-		Image img = loader.getImage("data/torres/sniper/imagem.gif");
-		return new TorreSniper((BufferedImage) img);
+		return null;*/
 	}
 }

@@ -2,14 +2,14 @@ package torre.factory;
 
 import java.io.PrintWriter;
 
-import game.manipulator.ManipuladorBalista;
+import game.manipulator.ManipuladorSniper;
 import game.manipulator.ManipuladorTorre;
 import torre.Torre;
 
 public class TorreSniperFactory extends TorreDefaultFactory {
     @Override
     public ManipuladorTorre criarManipulador(Torre t) {
-        return new ManipuladorBalista(t);
+        return new ManipuladorSniper(t);
     }
 
     @Override

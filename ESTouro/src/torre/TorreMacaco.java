@@ -1,13 +1,20 @@
 package torre;
 
+import java.awt.List;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
 import torre.factory.TorreFactory;
 import torre.factory.TorreMacacoFactory;
+import torre.modo_ataque.AtacaForte;
+import torre.modo_ataque.AtacaPrimeiro;
+import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
+import torre.visitor.VisitanteTorre;
 
 /**
  * Classe que representa uma torre Macaco. Esta torre manda um dardo com dano de
@@ -37,5 +44,10 @@ public class TorreMacaco extends TorreDefault {
 		p[0].setPosicao(shoot);
 		p[0].setAlcance(getRaioAcao() + 30);
 		return p;
+	}
+
+	@Override
+	public void aceita(VisitanteTorre v) {
+		v.visitaTorreMacaco();
 	}
 }

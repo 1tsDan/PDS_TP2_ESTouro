@@ -31,4 +31,11 @@ public class BloonComArmadura extends BloonDecorator {
 		super.desenhar(g);
         armaduraImg.desenhar(g);
 	}
+
+    @Override
+    public Bloon clone() {
+        BloonComArmadura copia = (BloonComArmadura) super.clone();
+        copia.armaduraImg = armaduraImg.clone();
+        return copia;
+    }
 }

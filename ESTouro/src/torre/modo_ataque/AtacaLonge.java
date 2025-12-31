@@ -6,6 +6,15 @@ import java.awt.Point;
 import bloon.Bloon;
 
 public class AtacaLonge implements EstrategiaModoAtaque {
+    private static final AtacaLonge INSTANCIA = new AtacaLonge();
+
+    private AtacaLonge() {
+    }
+    
+    public static EstrategiaModoAtaque getInstancia() {
+        return INSTANCIA;
+    }
+
 	@Override
 	public Point escolherAlvo(List<Bloon> bloons, Point centro) {
 		return bloons.stream().map(b -> b.getComponente().getPosicaoCentro())

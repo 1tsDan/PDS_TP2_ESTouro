@@ -7,18 +7,15 @@ import java.util.List;
 import bloon.Bloon;
 import mundo.Mundo;
 import prof.jogos2D.image.ComponenteMultiAnimado;
-import torre.factory.TorreFactory;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Interface que representa o comportamento que as torres devem ter. As torres
  * são os elementos que atiram projéteis sobre os bloons.
  */
 public interface Torre extends Cloneable {
-
-    public TorreFactory getFactory();
 
 	/**
 	 * Define a posição no écran da torre

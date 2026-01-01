@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreFactory;
 
 /**
  * Classe que trata da criação das várias torres. Esta classe existe que lidar
@@ -36,22 +35,5 @@ public class TorreCreator {
 	public Torre criarTorrePorNome(String nome) {
 		// TODO DONE suportar também a Sniper
         return torres.get(nome).clone();
-		/*switch (nome) {
-			case "octo":
-				return criarOctogonal();
-			case "macaco":
-				return criarMacaco();
-			case "canhao":
-				return criarCanhao();
-			case "morteiro":
-				return criarMorteiro();
-			case "balista":
-				return criarBalista();
-			case "ninja":
-				return criarNinja();
-			case "sniper":
-				return criarSniper();
-		}
-		return null;*/
 	}
 }

@@ -17,7 +17,6 @@ import prof.jogos2D.image.ComponenteMultiAnimado;
 import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreFactory;
 import torre.modo_ataque.AtacaForte;
 import torre.modo_ataque.AtacaJuntos;
 import torre.modo_ataque.AtacaLonge;
@@ -27,7 +26,7 @@ import torre.modo_ataque.AtacaUltimo;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que implementa os comportamentos e variáveis comuns a todos as torres.
@@ -35,7 +34,6 @@ import torre.visitor.VisitanteTorre;
  */
 public abstract class TorreDefault implements Torre {
 
-    private TorreFactory factory;
     private Mundo mundo; // mundo onde está a torre
     private ComponenteMultiAnimado imagem; // desenho da torre
     private List<EstrategiaModoAtaque> modosAtaque; // modos de ataque disponíveis na torre
@@ -83,15 +81,6 @@ public abstract class TorreDefault implements Torre {
             int raioAtaque, List<EstrategiaModoAtaque> modos) {
         this(cv, ritmoDisparo, delayDisparo, pontoDisparo, raioAtaque);
         modosAtaque = new ArrayList<>(modos);
-    }
-
-    @Override
-    public TorreFactory getFactory() {
-        return factory;
-    }
-
-    protected void setFactory(TorreFactory f) {
-        factory = Objects.requireNonNull(f);
     }
 
     protected void atualizarCicloDisparo() {
@@ -314,6 +303,6 @@ public abstract class TorreDefault implements Torre {
 
     @Override
     public void aceita(VisitanteTorre visitante) {
-        
+
     }
 }

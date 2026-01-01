@@ -8,12 +8,10 @@ import java.util.List;
 import bloon.Bloon;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreFactory;
-import torre.factory.TorreOctogonalFactory;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que representa a torre octogonal. Esta torre dispara 8 dardos, um em
@@ -21,13 +19,11 @@ import torre.visitor.VisitanteTorre;
  * raio de ação.
  */
 public class TorreOctogonal extends TorreDefault {
-	private static final TorreFactory FACTORY = new TorreOctogonalFactory();
 	private double baseAngle = 0;
 
 	public TorreOctogonal(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
 				20, 6, new Point(0, 0), 100, new ArrayList<EstrategiaModoAtaque>());
-        setFactory(FACTORY);
 	}
 
     @Override
@@ -63,6 +59,6 @@ public class TorreOctogonal extends TorreDefault {
 
     @Override
     public void aceita(VisitanteTorre visitante) {
-        visitante.visitaTorreOctogonal();
+        visitante.visitaTorreOctogonal(this);
     }
 }

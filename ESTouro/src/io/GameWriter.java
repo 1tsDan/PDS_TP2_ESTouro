@@ -5,13 +5,15 @@ import java.io.*;
 import java.util.List;
 
 import torre.*;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 import mundo.Mundo;
 
 /**
  * Classe responsável pela gravação dos ficheiros de jogo
  */
 public class GameWriter implements VisitanteTorre {
+    private PrintWriter out;
+    private Torre currentTorre;
 
 	/**
 	 * grava o jogo no seu estado atual
@@ -33,55 +35,57 @@ public class GameWriter implements VisitanteTorre {
 
 			List<Torre> torres = m.getTorres();
 			out.println(torres.size());
+
+            GameWriter visitor = new GameWriter();
+            visitor.out = out;
+
 			// TODO DONE remover estes instanceof
 			for (Torre t : torres) {
 				Point p = t.getComponente().getPosicaoCentro();
 				// escrever a posição e o tipo de torre
 				out.print(p.x + "\t" + p.y + "\t");
-				t.getFactory().gravarInfoAdicional(t, out);
-				t.aceita(this);
+				t.aceita(visitor);
 			}
 		}
 	}
 
-	@Override
-	public void visitaTorreCanhao() {
-		out.println("canhao");
-	}
+    @Override
+    public void visitaTorreCanhao(Torre t) {
+        out.println("canhao");
+    }
 
-	@Override
-	public void visitaTorreBalista() {
-		out.print("balista\t");
-		out.println(t.getComponente().getAngulo());
-	}
+    @Override
+    public void visitaTorreBalista(Torre t) {
+        out.print("balista\t");
+        out.println(t.getComponente().getAngulo());
+    }
 
-	@Override
-	public void visitaTorreSniper() {
-		out.print("sniper\t");
-		out.println(t.getComponente().getAngulo());
-	}
+    @Override
+    public void visitaTorreSniper(Torre t) {
+        out.print("sniper\t");
+        out.println(t.getComponente().getAngulo());
+    }
 
-	@Override
-	public void visitaTorreMacaco() {
-		out.println("macaco");
-	}
+    @Override
+    public void visitaTorreMacaco(Torre t) {
+        out.println("macaco");
+    }
 
-	@Override
-	public void visitaTorreMorteiro() {
-		out.print("morteiro\t");
-		Point ataque = ((TorreMorteiro) t).getAreaAlvo();
-		out.println(ataque.x + "\t" + ataque.y);
-	}
+    @Override
+    public void visitaTorreMorteiro(Torre t) {
+        out.print("morteiro\t");
+        Point ataque = ((TorreMorteiro) t).getAreaAlvo();
+        out.println(ataque.x + "\t" + ataque.y);
+    }
 
-	@Override
-	public void visitaTorreOctogonal() {
-		out.print("octo\t");
-		out.println(t.getComponente().getAngulo());
-	}
+    @Override
+    public void visitaTorreOctogonal(Torre t) {
+        out.print("octo\t");
+        out.println(t.getComponente().getAngulo());
+    }
 
-	@Override
-	public void visitaTorreNinja() {
-		out.println("ninja");
-	}
-
+    @Override
+    public void visitaTorreNinja(Torre t) {
+        out.println("ninja");
+    }
 }

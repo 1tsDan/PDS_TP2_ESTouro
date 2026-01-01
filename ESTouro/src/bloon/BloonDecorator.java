@@ -122,6 +122,8 @@ public class BloonDecorator implements Bloon {
 
     @Override
     public Bloon clone() {
-        return decorado.clone();
+        Bloon copia = decorado.clone();
+        return new BloonDecorator(copia);
     }
 }
+ 

@@ -13,21 +13,16 @@ import java.util.List;
 import bloon.Bloon;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreBalistaFactory;
-import torre.factory.TorreFactory;
-import torre.factory.TorreSniperFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que representa a torre balista. Esta torre dispara 1 dardo enorme e
  * potente na direção especificada pelo jogador.
  */
 public class TorreSniper extends TorreDefault {
-
-    private static final TorreFactory FACTORY = new TorreSniperFactory();
 
     private static final int ALCANCE = Integer.MAX_VALUE;
 
@@ -38,7 +33,6 @@ public class TorreSniper extends TorreDefault {
 		super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
 				30, 0, new Point(20, -3), ALCANCE);
 		setAnguloDisparo(0);
-        setFactory(FACTORY);
 	}
 
 	public void setAnguloDisparo(float angulo) {
@@ -116,6 +110,6 @@ public class TorreSniper extends TorreDefault {
 
     @Override
     public void aceita(VisitanteTorre v) {
-        v.visitaTorreSniper();
+        v.visitaTorreSniper(this);
     }
 }

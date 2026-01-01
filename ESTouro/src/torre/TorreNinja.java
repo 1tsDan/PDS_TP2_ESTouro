@@ -11,21 +11,16 @@ import prof.jogos2D.image.ComponenteSimples;
 import prof.jogos2D.image.ComponenteVisual;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreBalistaFactory;
-import torre.factory.TorreFactory;
-import torre.factory.TorreNinjaFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que representa a torre ninja. Esta torre dispara alternadamente 3
  * dardos ou 1 granada para os bloons de acordo com o seu modo de ataque.
  */
 public class TorreNinja extends TorreDefault {
-
-    private static final TorreFactory FACTORY = new TorreNinjaFactory();
 
     private boolean dardos = false;
 
@@ -36,7 +31,6 @@ public class TorreNinja extends TorreDefault {
      */
     public TorreNinja(BufferedImage img) {
         super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 3), 30, 8, new Point(20, 0), 100);
-        setFactory(FACTORY);
     }
 
     @Override
@@ -64,6 +58,6 @@ public class TorreNinja extends TorreDefault {
 
     @Override
     public void aceita(VisitanteTorre v) {
-        v.visitaTorreNinja();
+        v.visitaTorreNinja(this);
     }
 }

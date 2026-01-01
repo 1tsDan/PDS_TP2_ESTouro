@@ -7,14 +7,12 @@ import java.util.ArrayList;
 
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreFactory;
-import torre.factory.TorreMacacoFactory;
 import torre.modo_ataque.AtacaForte;
 import torre.modo_ataque.AtacaPrimeiro;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.Dardo;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que representa uma torre Macaco. Esta torre manda um dardo com dano de
@@ -23,8 +21,6 @@ import torre.visitor.VisitanteTorre;
  */
 public class TorreMacaco extends TorreDefault {
 
-	private static final TorreFactory FACTORY = new TorreMacacoFactory();
-
 	/**
 	 * Cria a torre macaco
 	 *
@@ -32,7 +28,6 @@ public class TorreMacaco extends TorreDefault {
 	 */
 	public TorreMacaco(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 3), 30, 8, new Point(15, 15), 100);
-		setFactory(FACTORY);
 	}
 
 	@Override
@@ -48,6 +43,6 @@ public class TorreMacaco extends TorreDefault {
 
 	@Override
 	public void aceita(VisitanteTorre v) {
-		v.visitaTorreMacaco();
+		v.visitaTorreMacaco(this);
 	}
 }

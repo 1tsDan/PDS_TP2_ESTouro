@@ -11,12 +11,10 @@ import game.EscolhaPistasDialog;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreFactory;
-import torre.factory.TorreMorteiroFactory;
 import torre.modo_ataque.EstrategiaModoAtaque;
 import torre.projetil.BombaDirigida;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que representa a torre morteiro. Esta torre dispara uma bomba para um
@@ -25,7 +23,6 @@ import torre.visitor.VisitanteTorre;
  */
 public class TorreMorteiro extends TorreDefault {
 
-    private static final TorreFactory FACTORY = new TorreMorteiroFactory();
     private Point areaAlvo; // destino das bombas
     private int alcance; // alcance máximo da torre
 
@@ -39,7 +36,6 @@ public class TorreMorteiro extends TorreDefault {
                 30, 0, new Point(30, 15), 0, new ArrayList<EstrategiaModoAtaque>());
         areaAlvo = new Point(100, 100);
         alcance = 200;
-        setFactory(FACTORY);
     }
 
     /**
@@ -115,6 +111,6 @@ public class TorreMorteiro extends TorreDefault {
 
     @Override
     public void aceita(VisitanteTorre v) {
-        v.visitaTorreMorteiro();
+        v.visitaTorreMorteiro(this);
     }
 }

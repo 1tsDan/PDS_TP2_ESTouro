@@ -42,39 +42,6 @@ public class BloonCreator {
 	 */
 	public Bloon criarBloon(String nome) {
         return bloons.get(nome).clone();
-		/*switch (nome) {
-			case "vermelho":
-				return criarVermelho();
-			case "azul":
-				return criarAzul();
-			case "verde":
-				return criarVerde();
-			case "amarelo":
-				return criarAmarelo();
-			case "rosa":
-				return criarRosa();
-			case "metal":
-				return criarMetal();
-			case "barro":
-				return criarBarro();
-			case "preto":
-				return criarPreto();
-			case "branco":
-				return criarBranco();
-			case "zep_azul":
-				return criarZeppelinAzul();
-			case "zep_verde":
-				return criarZeppelinVerde();
-			case "zep_amarelo":
-				return criarZeppelinAmarelo();
-			case "zep_rosa":
-				return criarZeppelinRosa();
-			case "zep_metal":
-				return criarZeppelinMetal();
-			case "zep_preto":
-				return criarZeppelinPreto();
-		}
-		return null;*/
 	}
 
 	private ComponenteVisual getImagem(String nome) {

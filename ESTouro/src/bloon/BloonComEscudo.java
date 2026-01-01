@@ -23,16 +23,15 @@ public class BloonComEscudo extends BloonDecorator {
         }
     }
 
-   @Override
-	public void desenhar(Graphics2D g) {
-		super.desenhar(g);
+    @Override
+    public void desenhar(Graphics2D g) {
+        super.desenhar(g);
         escudoImg.desenhar(g);
-	}
+    }
 
     @Override
     public Bloon clone() {
-        BloonComEscudo copia = (BloonComEscudo) super.clone();
-        copia.escudoImg = escudoImg.clone();
-        return copia;
+        Bloon copia = super.clone();
+        return new BloonComArmadura(copia, durabilidade, escudoImg);
     }
 }

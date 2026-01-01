@@ -8,12 +8,9 @@ import bloon.Bloon;
 import prof.jogos2D.image.*;
 import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
-import torre.factory.TorreBalistaFactory;
-import torre.factory.TorreCanhaoFactory;
-import torre.factory.TorreFactory;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Projetil;
-import torre.visitor.VisitanteTorre;
+import torre.VisitanteTorre;
 
 /**
  * Classe que representa a torre canhão. Esta torre dispara uma bomba que
@@ -21,12 +18,10 @@ import torre.visitor.VisitanteTorre;
  * raio de ação e atira para o bloon de acordo com o seu modo de ataque
  */
 public class TorreCanhao extends TorreDefault {
-	private static final TorreFactory FACTORY = new TorreCanhaoFactory();
 
 	public TorreCanhao(BufferedImage img) {
 		super(new ComponenteMultiAnimado(new Point(50, 50), img, 2, 4, 2),
 				30, 0, new Point(25, 0), 120);
-		setFactory(FACTORY);
 	}
 
 	@Override
@@ -41,6 +36,6 @@ public class TorreCanhao extends TorreDefault {
 
 	@Override
 	public void aceita(VisitanteTorre v) {
-		v.visitaTorreCanhao();
+		v.visitaTorreCanhao(this);
 	}
 }

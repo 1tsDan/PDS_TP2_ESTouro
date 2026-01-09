@@ -12,7 +12,7 @@ import prof.jogos2D.image.ComponenteVisual;
 /**
  * Interface que define quais os métodos que todos os bloons devem implementar
  */
-public interface Bloon {
+public interface Bloon extends Cloneable {
 
 	/**
 	 * desenha o bloon

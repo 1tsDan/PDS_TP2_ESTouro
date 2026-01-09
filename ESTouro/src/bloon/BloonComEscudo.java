@@ -32,6 +32,6 @@ public class BloonComEscudo extends BloonDecorator {
     @Override
     public Bloon clone() {
         Bloon copia = super.clone();
-        return new BloonComArmadura(copia, durabilidade, escudoImg);
+        return new BloonComEscudo(copia, durabilidade, escudoImg);
     }
 }

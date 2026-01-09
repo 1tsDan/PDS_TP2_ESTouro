@@ -13,7 +13,6 @@ import mundo.Mundo;
  */
 public class GameWriter implements VisitanteTorre {
     private PrintWriter out;
-    private Torre currentTorre;
 
 	/**
 	 * grava o jogo no seu estado atual

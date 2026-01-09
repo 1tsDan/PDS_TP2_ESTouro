@@ -14,7 +14,7 @@ import prof.jogos2D.image.*;
  * tipos de bloons, pelo que define vários métodos e campos comuns a todos os
  * bloons. Contém também alguns métodos auxiliares para as subclasses.
  */
-public class BloonSimples implements Bloon, Cloneable {
+public class BloonSimples implements Bloon{
 
 	/**
 	 * variáveis comuns aos bloons

@@ -9,4 +9,9 @@ public class BloonImuneExplosivos extends BloonDecorator {
     public void explode(int estrago) {
         return;
     }
+
+    @Override
+    public Bloon clone() {
+        return new BloonImuneExplosivos(super.clone());
+    }
 }

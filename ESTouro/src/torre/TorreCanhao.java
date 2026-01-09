@@ -10,7 +10,6 @@ import prof.jogos2D.util.DetectorColisoes;
 import prof.jogos2D.util.ImageLoader;
 import torre.projetil.BombaImpacto;
 import torre.projetil.Projetil;
-import torre.VisitanteTorre;
 
 /**
  * Classe que representa a torre canhão. Esta torre dispara uma bomba que

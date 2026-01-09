@@ -19,43 +19,43 @@ import torre.VisitanteTorre;
  * raio de ação.
  */
 public class TorreOctogonal extends TorreDefault {
-	private double baseAngle = 0;
+    private double baseAngle = 0;
 
-	public TorreOctogonal(BufferedImage img) {
-		super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
-				20, 6, new Point(0, 0), 100, new ArrayList<EstrategiaModoAtaque>());
-	}
+    public TorreOctogonal(BufferedImage img) {
+        super(new ComponenteMultiAnimado(new Point(), img, 2, 4, 2),
+                20, 6, new Point(0, 0), 100, new ArrayList<EstrategiaModoAtaque>());
+    }
 
     @Override
-    public double escolherAngulo(ComponenteMultiAnimado anim, Point posAlvo){
+    public double escolherAngulo(ComponenteMultiAnimado anim, Point posAlvo) {
         return 0;
     }
 
     @Override
-    public Projetil[] criarProjetil(Point shoot, double angle){
+    public Projetil[] criarProjetil(Point shoot, double angle) {
         Projetil p[] = new Projetil[8];
-		double angulo = baseAngle + Math.PI / 2;
-		double incAng = Math.PI / 4;
-		for (int i = 0; i < 8; i++) {
-			ComponenteVisual img = new ComponenteAnimado(new Point(),
-					(BufferedImage) ImageLoader.getLoader().getImage("data/torres/dardo.gif"), 2, 2);
-			p[i] = new Dardo(img, angulo, 8, 1);
-			p[i].setPosicao(shoot);
-			p[i].setAlcance(getRaioAcao() + 15);
-			angulo -= incAng;
-		}
-		return p;
+        double angulo = baseAngle + Math.PI / 2;
+        double incAng = Math.PI / 4;
+        for (int i = 0; i < 8; i++) {
+            ComponenteVisual img = new ComponenteAnimado(new Point(),
+                    (BufferedImage) ImageLoader.getLoader().getImage("data/torres/dardo.gif"), 2, 2);
+            p[i] = new Dardo(img, angulo, 8, 1);
+            p[i].setPosicao(shoot);
+            p[i].setAlcance(getRaioAcao() + 15);
+            angulo -= incAng;
+        }
+        return p;
     }
 
-	/**
-	 * Altera o ângulo da octo
-	 *
-	 * @param angle o novo ângulo
-	 */
-	public void setAngle(double angle) {
-		getComponente().setAngulo(angle);
-		baseAngle = angle;
-	}
+    /**
+     * Altera o ângulo da octo
+     *
+     * @param angle o novo ângulo
+     */
+    public void setAngle(double angle) {
+        getComponente().setAngulo(angle);
+        baseAngle = angle;
+    }
 
     @Override
     public void aceita(VisitanteTorre visitante) {
